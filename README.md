@@ -29,15 +29,16 @@ Syntax rules are saved in a `.vim` file in the same directory, which is then sou
 
 ### Shortcuts
 
-| Key Combination        | Action                                  |
-| :--------------------- | --------------------------------------: |
-| `<Leader><Leader>`     | Start presentation on the current slide |
-| `<Leader><Right>`      | Next slide                              |
-| `<Leader><Left>`       | Previous slide                          |
-| `<Leader>t1`           | Create a big title (uses `toilet`)      |
-| `<Leader>t2`           | Create a small title (uses `toilet`)    |
-| `<Leader>b1`           | Draw borders (uses `toilet`)            |
-| `<Leader>co`           | Colorize the current word               |
-| `<Leader>em`           | Emphasize the current word              |
-| `<Leader>it`           | Italicize the current word              |
-| `<Leader>ul`           | Underline the current word              |
+| Key Combination        | Action                                                     |
+| :--------------------- | --------------------------------------:                    |
+| `<Leader><Leader>`     | Start presentation on the current slide                    |
+| `<Leader><Right>`      | Next slide                                                 |
+| `<Leader><Left>`       | Previous slide                                             |
+| `<Leader>t1`           | Create a big title from the current line (uses `toilet`)   |
+| `<Leader>t2`           | Create a small title from the current line (uses `toilet`) |
+| `<Leader>t3`           | Create a fancy title from the current line (uses `toilet`) |
+| `<Leader>b1`           | Draw borders around the current line (uses `toilet`)       |
+| `<Leader>co`           | Colorize the current word                                  |
+| `<Leader>em`           | Emphasize the current word                                 |
+| `<Leader>it`           | Italicize the current word                                 |
+| `<Leader>ul`           | Underline the current word                                 |
