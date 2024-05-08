@@ -18,6 +18,10 @@ Syntax rules are saved in a `.vim` file in the same directory, which is then sou
 
 ### Installation
 
+Native:
+
++ Clone into `~/.vim/pack/plugins/start/blackbubble`
+
 `vim-plug`:
 
 + Add `Plug 'https://github.com/limaara/blackbubble'` to your vimrc
