@@ -8,7 +8,8 @@ function BlackBubble()
 		source %.vim
 	endif
 
-	set foldtext=v:folddashes | highlight Folded ctermfg=239
+	set foldmethod=manual
+	set foldtext=v:folddashes | highlight Folded ctermfg=239 ctermbg=none
 
 	nnoremap <buffer> <Leader>t1 :.!toilet -f mono9<CR>
 	nnoremap <buffer> <Leader>t2 :.!toilet -f smblock<CR>
