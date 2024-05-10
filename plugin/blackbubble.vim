@@ -1,54 +1,49 @@
 autocmd BufRead,BufNewFile *.bbb call BlackBubble()
 
-function BlackBubble()
+function! BlackBubble()
+  set filetype=blackbubble
+  call Mappings()
+  if !empty(glob("bbb.vim"))
+    source bbb.vim
+  endif
+endfunction
 
-	set filetype=blackbubble
+function! Mappings()
+  nnoremap <Leader><Leader> :rew<CR>
+  nnoremap <silent> <Right> :n<CR>
+  nnoremap <silent> <Left> :N<CR>
+  nnoremap <Leader>t1 :.!toilet -f mono9<CR>
+  nnoremap <Leader>t2 :.!toilet -f smblock<CR>
+  nnoremap <Leader>t3 :.!toilet -f future<CR>
+  nnoremap <Leader>b1 :.!toilet -f term -F border<CR>
+  nnoremap <silent> <Leader>co :call ColorizeWord()<CR>
+  nnoremap <silent> <Leader>em :call EmphasizeWord()<CR>
+  nnoremap <silent> <Leader>it :call ItalicizeWord()<CR>
+  nnoremap <silent> <Leader>ul :call UnderlineWord()<CR>
+endfunction
 
-	if !empty(glob("%.vim"))
-		source %.vim
-	endif
+function! ColorizeWord()
+  let current_word = expand ("<cword>")
+  let word_color = inputlist(['Color:', '1. Red', '2. Green', '3. Yellow',
+      \'4. Blue', '5. Magenta', '6. Cyan', '7. Gray'])
+  execute '!echo -e "syn match ' . current_word . 'colorize \"' . current_word . '\"\nhi ' . current_word .'colorize ctermfg=' . word_color . '" >> bbb.vim'
+  source bbb.vim
+endfunction
 
-	set foldmethod=manual
-	set foldtext=v:folddashes | highlight Folded ctermfg=239 ctermbg=none
+function! EmphasizeWord()
+  let current_word = expand ("<cword>")
+  execute '!echo -e "syn match ' . current_word . 'emphasize \"' . current_word . '\"\nhi ' . current_word .'emphasize cterm=bold" >> bbb.vim'
+  source bbb.vim
+endfunction
 
-	nnoremap <buffer> <Leader>t1 :.!toilet -f mono9<CR>
-	nnoremap <buffer> <Leader>t2 :.!toilet -f smblock<CR>
-	nnoremap <buffer> <Leader>t3 :.!toilet -f future<CR>
-	nnoremap <buffer> <Leader>b1 :.!toilet -f term -F border<CR>
+function! ItalicizeWord()
+  let current_word = expand ("<cword>")
+  execute '!echo -e "syn match ' . current_word . 'italicize \"' . current_word . '\"\nhi ' . current_word .'italicize cterm=italic" >> bbb.vim'
+  source bbb.vim
+endfunction
 
-	nnoremap <buffer> <Leader><Leader> {zfgg}zfGk
-	nnoremap <buffer> <silent> <Right> zE}zfgg}zfGk
-	nnoremap <buffer> <silent> <Left> zE{{zfgg}zfGk
-
-	function WordColorize()
-		let current_word = expand ("<cword>")
-		let word_color = inputlist(['Color:', '1. Red', '2. Green', '3. Yellow',
-				\'4. Blue', '5. Magenta', '6. Cyan', '7. Gray'])
-		execute '!echo -e "syn match ' . current_word . 'icolorize \"' . current_word . '\"\nhi ' . current_word .'icolorize ctermfg=' . word_color . '" >> %.vim'
-		source %:p.vim
-	endfunction
-
-	function WordEmphasize()
-		let current_word = expand ("<cword>")
-		execute '!echo -e "syn match ' . current_word . 'emphasize \"' . current_word . '\"\nhi ' . current_word .'emphasize cterm=bold" >> %.vim'
-		source %:p.vim
-	endfunction
-
-	function WordItalicize()
-		let current_word = expand ("<cword>")
-		execute '!echo -e "syn match ' . current_word . 'italicize \"' . current_word . '\"\nhi ' . current_word .'italicize cterm=italic" >> %.vim'
-		source %:p.vim
-	endfunction
-
-	function WordUnderline()
-		let current_word = expand ("<cword>")
-		execute '!echo -e "syn match ' . current_word . 'underline \"' . current_word . '\"\nhi ' . current_word .'underline cterm=underline" >> %.vim'
-		source %:p.vim
-	endfunction
-
-	nnoremap <buffer> <silent> <Leader>co :call WordColorize()<CR>
-	nnoremap <buffer> <silent> <Leader>em :call WordEmphasize()<CR>
-	nnoremap <buffer> <silent> <Leader>it :call WordItalicize()<CR>
-	nnoremap <buffer> <silent> <Leader>ul :call WordUnderline()<CR>
-
+function! UnderlineWord()
+  let current_word = expand ("<cword>")
+  execute '!echo -e "syn match ' . current_word . 'underline \"' . current_word . '\"\nhi ' . current_word .'underline cterm=underline" >> bbb.vim'
+  source bbb.vim
 endfunction
