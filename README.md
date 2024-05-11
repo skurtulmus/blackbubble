@@ -45,7 +45,7 @@ Native:
 | `<Leader>t2`           | Create a small title from the current line (uses `toilet`) |
 | `<Leader>t3`           | Create a fancy title from the current line (uses `toilet`) |
 | `<Leader>b1`           | Draw borders around the current line (uses `toilet`)       |
-| `<Leader>co`           | Colorize the current word                                  |
-| `<Leader>em`           | Emphasize the current word                                 |
-| `<Leader>it`           | Italicize the current word                                 |
-| `<Leader>ul`           | Underline the current word                                 |
+| `<Leader>co`           | Colorize the selection                                     |
+| `<Leader>bo`           | Emphasize the selection                                    |
+| `<Leader>it`           | Italicize the selection                                    |
+| `<Leader>ul`           | Underline the selection                                    |
