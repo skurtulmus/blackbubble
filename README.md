@@ -4,7 +4,7 @@ _Very simple Vim plugin for creating presentations_
 
 ---
 
-![](blackbubble.png)
+![](screenshot.png)
 
 `blackbubble` turns Vim into a simple presentation tool, using plain text files and ad-hoc syntax highlighting to make slides stand out.
 It can also use [toilet](https://github.com/cacalabs/toilet) to create banners from text.
