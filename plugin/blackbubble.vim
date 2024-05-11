@@ -17,47 +17,65 @@ function! BBB_Mappings()
   nnoremap <Leader>t3 :.!toilet -f future<CR>
   nnoremap <Leader>b1 :.!toilet -f term -F border<CR>
   nnoremap <silent> <Leader>co :call BBB_Color()<CR>
-  nnoremap <silent> <Leader>bo :call BBB_Bold()<CR>
-  nnoremap <silent> <Leader>it :call BBB_Italic()<CR>
-  nnoremap <silent> <Leader>ul :call BBB_Underline()<CR>
+  nnoremap <silent> <Leader>ft :call BBB_Font()<CR>
 endfunction
 
 function! BBB_Color()
+  let current_line = BBB_GetLine()
   let current_selection = BBB_GetSelection()
   let group_name = BBB_GetGroupname(current_selection)
-  let selection_color = inputlist(['Color:', '1. Red', '2. Green', '3. Yellow',
-    \'4. Blue', '5. Magenta', '6. Cyan', '7. Gray'])
+  let selection_color = inputlist(['Color:',
+    \ '1. Red',
+    \ '2. Green',
+    \ '3. Yellow',
+    \ '4. Blue',
+    \ '5. Magenta',
+    \ '6. Cyan',
+    \ '7. Gray'
+    \ ])
   if selection_color < 1 || selection_color > 7
     echohl WarningMsg
     echo "\nInvalid color. Please enter a number from 1 to 7."
     echohl None
     return
   endif
-  execute '!echo -e "syn match bbb_' . group_name . '_colorize \"' . current_selection . '\"\nhi bbb_' . group_name .'_colorize ctermfg=' . selection_color . '" >> bbb.vim'
+  execute '!echo -e "syn match bbb_' . group_name . '_color \"' . current_selection . '\" contained\nsyn match line_' . group_name . '_container \"'. current_line . '\" contains=ALL\nhi bbb_' . group_name .'_color ctermfg=' . selection_color . '" >> bbb.vim'
   source bbb.vim
 endfunction
 
-function! BBB_Bold()
+function! BBB_Font()
+  let current_line = BBB_GetLine()
   let current_selection = BBB_GetSelection()
-  execute '!echo -e "syn match bbb_' . current_selection . 'emphasize \"' . current_selection . '\"\nhi ' . current_selection .'emphasize cterm=bold" >> bbb.vim'
+  let group_name = BBB_GetGroupname(current_selection)
+  let selection_number = inputlist(['Font:',
+    \ '1. Bold',
+    \ '2. Italic',
+    \ '3. Underline'
+    \ ])
+  if selection_number == 1
+    let selection_font = "bold"
+  elseif selection_number == 2
+    let selection_font = "italic"
+  elseif selection_number == 3
+    let selection_font = "underline"
+  else
+    echohl WarningMsg
+    echo "\nInvalid font. Please enter a number from 1 to 3."
+    echohl None
+    return
+  endif
+  execute '!echo -e "syn match bbb_' . group_name . '_font \"' . current_selection . '\" contained\nsyn match line_' . group_name . '_container \"'. current_line . '\" contains=ALL\nhi bbb_' . group_name .'_font cterm=' . selection_font . '" >> bbb.vim'
   source bbb.vim
 endfunction
 
-function! BBB_Italic()
-  let current_selection = BBB_GetSelection()
-  execute '!echo -e "syn match bbb_' . current_selection . 'italicize \"' . current_selection . '\"\nhi ' . current_selection .'italicize cterm=italic" >> bbb.vim'
-  source bbb.vim
+function BBB_GetLine()
+let line = getline('.')
+return line
 endfunction
 
-function! BBB_Underline()
-  let current_selection = BBB_GetSelection()
-  execute '!echo -e "syn match bbb_' . current_selection . 'underline \"' . current_selection . '\"\nhi ' . current_selection .'underline cterm=underline" >> bbb.vim'
-  source bbb.vim
-endfunction
-
-function! BBB_GetGroupname(str)
-  let name = substitute(a:str[:10], '\s\+', '', 'g')
-  return name
+function! BBB_GetGroupname(selection)
+  let group_name = substitute(a:selection[:10], '\s\+', '', 'g')
+  return group_name
 endfunction
 
 function! BBB_GetSelection()
@@ -76,13 +94,13 @@ function! BBB_GetSelection()
   return selection
 endfunction
 
+function BBB_GetCword()
+let cword = expand("<cword>")
+return cword
+endfunction
+
 function! BBB_GetVisual()
   normal! gv"vy
   let visual = getreg("v")
   return visual
-endfunction
-
-function! BBB_GetCword()
-  let cword = expand("<cword>")
-  return cword
 endfunction

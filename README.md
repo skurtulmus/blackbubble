@@ -46,6 +46,4 @@ Native:
 | `<Leader>t3`           | Create a fancy title from the current line (uses `toilet`) |
 | `<Leader>b1`           | Draw borders around the current line (uses `toilet`)       |
 | `<Leader>co`           | Colorize the selection                                     |
-| `<Leader>bo`           | Emphasize the selection                                    |
-| `<Leader>it`           | Italicize the selection                                    |
-| `<Leader>ul`           | Underline the selection                                    |
+| `<Leader>ft`           | Change the font of the selection (B/I/U)                   |
