@@ -1,10 +1,11 @@
+const s:SYNTAXFILE = "bbb.vim"
 autocmd BufRead,BufNewFile *.bbb call BlackBubble()
 
 function! BlackBubble()
   set filetype=blackbubble
   call BBB_Mappings()
-  if !empty(glob("bbb.vim"))
-    source bbb.vim
+  if !empty(glob(s:SYNTAXFILE))
+    execute 'source ' . s:SYNTAXFILE
   endif
 endfunction
 
@@ -39,8 +40,8 @@ function! BBB_Color()
     echohl None
     return
   endif
-  execute '!echo -e "syn match bbb_' . group_name . '_color \"' . current_selection . '\" contained\nsyn match line_' . group_name . '_container \"'. current_line . '\" contains=ALL\nhi bbb_' . group_name .'_color ctermfg=' . selection_color . '" >> bbb.vim'
-  source bbb.vim
+  execute '!echo -e "syn match bbb_' . group_name . '_color \"' . current_selection . '\" contained\nsyn match line_' . group_name . '_container \"'. current_line . '\" contains=ALL\nhi bbb_' . group_name .'_color ctermfg=' . selection_color . '" >> ' . s:SYNTAXFILE
+  execute 'source ' . s:SYNTAXFILE
 endfunction
 
 function! BBB_Font()
@@ -64,8 +65,8 @@ function! BBB_Font()
     echohl None
     return
   endif
-  execute '!echo -e "syn match bbb_' . group_name . '_font \"' . current_selection . '\" contained\nsyn match line_' . group_name . '_container \"'. current_line . '\" contains=ALL\nhi bbb_' . group_name .'_font cterm=' . selection_font . '" >> bbb.vim'
-  source bbb.vim
+  execute '!echo -e "syn match bbb_' . group_name . '_font \"' . current_selection . '\" contained\nsyn match line_' . group_name . '_container \"'. current_line . '\" contains=ALL\nhi bbb_' . group_name .'_font cterm=' . selection_font . '" >> ' . s:SYNTAXFILE
+  execute 'source ' . s:SYNTAXFILE
 endfunction
 
 function BBB_GetLine()
