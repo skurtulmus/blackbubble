@@ -4,7 +4,7 @@ _Very simple Vim plugin for creating presentations_
 
 ---
 
-![](screenshot.png)
+![](https://raw.github.com/skurtulmus/img/main/blackbubble.png)
 
 __BlackBubble__ turns Vim into a simple presentation tool, using plain text files and ad-hoc syntax highlighting to make slides stand out.
 Highlighting selections can be made using the current word under the cursor, or using visual mode.
