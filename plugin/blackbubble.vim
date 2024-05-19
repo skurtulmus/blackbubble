@@ -1,4 +1,4 @@
-" Copyright (c) 2021 Sinan Kurtulmus
+" Copyright (c) 2024 Sinan Kurtulmus
 "
 " Permission to use, copy, modify, and distribute this software for any
 " purpose with or without fee is hereby granted, provided that the above
@@ -34,6 +34,12 @@ function! BBB_Mappings()
 endfunction
 
 function! BBB_Font()
+    if executable("toilet") != 1
+        echohl WarningMsg
+        echo "\nCannot create banners: Toilet not installed."
+        echohl None
+        return
+    endif
     let font_number = inputlist(['Ascii Font:',
         \ '1. Mono9 (Big Title)',
         \ '2. Smblock (Small Title)',
